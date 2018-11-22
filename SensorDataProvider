@@ -1,0 +1,27 @@
+class SensorDataProvider
+{
+  String filePath;
+  Table dataTable;
+  int currentIndex;
+  Intialize()
+  {
+  }
+  readNext()
+  {
+  }
+  readRPM()
+  {
+  }
+  readFuelLevel()
+  {
+  }
+  readRatio()
+  {
+  }
+  readX()
+  {
+  }
+  readY()
+  {
+  }
+  }
