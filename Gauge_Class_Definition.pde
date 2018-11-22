@@ -34,6 +34,31 @@ class Gauge {
     textSize(56);
     text((int)current_value, gauge_posx- diameter/5, gauge_posy +diameter/6);
   }
+  
+  //Constructor Function (makes assigning values to member variables simpler in the setup/draw
+  Gauge (float max, float min, float z, String u, float x, float y, float d)
+  {
+  maximum = max;
+  minimum = min;
+  current_value = z;
+  units = u;
+  gauge_posx =x;
+  gauge_posy= y;
+  diameter=d;
+  }
+  
+  //Blank Constructor Function (We can probably delete this later)
+  Gauge ()
+  {
+  maximum = 0;
+  minimum = 0;
+  current_value = 0;
+  units = "Null";
+  gauge_posx =0;
+  gauge_posy= 0;
+  diameter=0;
+  }
+  
 }
 
 
