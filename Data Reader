@@ -1,0 +1,20 @@
+// For this code to work, car_status_BMW_323i.csv must be in same folder as pde file. 
+// We will have to code a selection between this and the other csv file for the truck (menu screen) for which one gets chosen as filePath
+String filePath = "car_status_BMW_323i.csv";
+int currentIndex = 0;
+
+void draw ()
+{
+  Table dataTable = loadTable(filePath, "header");
+  TableRow row;
+  row = dataTable.getRow(currentIndex);
+  //Code for printing contents of each row in table to console
+  println();
+  print(" Time: " + row.getFloat("Time") + " Gear Ratio: " +row.getFloat("Gear Ratio") + " Fuel Level: " + row.getFloat("Fuel Level (liter)"));
+  print(" RPM :", row.getInt("RPM"), "X : " + row.getFloat("X") + " Y : " + row.getFloat("Y"));
+  
+  //Code for stopping the draw function once it has reached the end of the csv file
+    currentIndex++;
+    if (currentIndex>=600)
+    noLoop();
+}
