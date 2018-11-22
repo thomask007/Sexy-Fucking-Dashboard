@@ -36,6 +36,8 @@ class Gauge {
   }
 }
 
+
+// This is all just for testing purposes
 void setup()
 {
   //Prepares Screen
