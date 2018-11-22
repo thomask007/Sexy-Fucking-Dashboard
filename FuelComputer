@@ -1,0 +1,26 @@
+class FuelComputer
+{
+  float fuelEconomy;
+  float fuelConsumption;
+  float fuelEconomyHistory;
+  float range;
+  float averagefuelEconomy;
+  float calculateFuelEconomy(float DistanceTravelled, float ConsumedFuel)
+  {
+    fuelEconomy = (DistanceTravelled/ConsumedFuel);
+    return fuelEconomy;
+  }
+  calculateAverageFuelEconomy(float fuelEconomyHistroy)
+  {
+    averagefuelEconomy
+  }
+  float calculateFuelConsumption(float AverageFuelEconomy)
+  {
+    fuelConsumption = (1/AverageFuelEconomy)*100;
+    return fuelConsumption;
+  }
+  float calculateRange(float AverageFuelEconomy, float RemainingFuel)
+  {
+    range = averagefuelEconomy * RemainingFuel;
+  }
+}
