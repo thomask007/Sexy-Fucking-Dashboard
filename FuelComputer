@@ -11,19 +11,20 @@ class FuelComputer
   float calculateFuelEconomy(float totalTravelledDistance, float fuelConsumption)
   {
     fuelEconomy = (totalTravelledDistance/fuelConsumption);
+    fuelEconomyHistory += fuelEconomy;
     return fuelEconomy;
   }
   
   //Calculating Average Fuel Economy, the while loop condition should be changed, im not too sure about it   
-  calculateAverageFuelEconomy(float fuelEconomyHistory)
+  float calculateAverageFuelEconomy(float fuelEconomyHistory, int currentIndex)
   {
     int counter = 1;
     while (currentIndex >= 0)
     {
-      averageFuelEconomy = fuelEconomyHistory/counter;
+      averageFuelEconomy = fuelEconomyHistory/(float)counter;
       counter++;
-      return averagefuelEconomy;
     }
+    return averageFuelEconomy;
   }
   
   //Calculating Fuel Consumption
