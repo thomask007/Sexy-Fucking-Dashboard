@@ -6,7 +6,7 @@ class FuelComputer
   float fuelEconomyHistory; 
   float range;
   float averageFuelEconomy;
-  
+
   //Calculating Fuel Economy 
   float calculateFuelEconomy(float totalTravelledDistance, float fuelConsumption)
   {
@@ -40,4 +40,10 @@ class FuelComputer
     range = averageFuelEconomy * remainingFuel;
     return range;
   }
+  
+  void setFuelComputer(float totalTravelledDistance1)
+  {
+    totalTravelledDistance = totalTravelledDistance1; // need a global variable that stores the total travelled distance in order for this to work
+  }
+  
 }
