@@ -7,8 +7,16 @@ class TripComputer
   float radius; // supposed to be given in the .csv, idk about this yet
   
   //Calculating speed based on formula given, not sure about radius being a part of the input 
-  float getCurrentSpeed(float RPM, float gearRatio, float radius) 
+  float getCurrentSpeed(String filepath, float RPM, float gearRatio, float radius) 
   {
+    if (filepath == "car_status_BMW_323i.csv")
+    {
+      radius = 23;
+    }
+    else if (filepath == "car_status_Truck_F150.csv")
+    {
+      radius = 25.4;
+    }
     float speed; 
     speed = ( (RPM/60) * (1/gearRatio) * 2 * PI * radius); // from document
     return speed;
@@ -21,3 +29,4 @@ class TripComputer
     return totalTravelledDistance;
   } 
 }
+  
