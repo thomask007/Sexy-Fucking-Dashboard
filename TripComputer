@@ -1,20 +1,23 @@
 class TripComputer
 {
+  //Member Variables
   float RPM;
   float gearRatio;
   float totalTravelledDistance; 
-  float radius; // supposed to be given, idk about this yet
+  float radius; // supposed to be given in the .csv, idk about this yet
+  
+  //Calculating speed based on formula given, not sure about radius being a part of the input 
   float getCurrentSpeed(float RPM, float gearRatio, float radius) 
   {
     float speed; 
-    speed = ( (RPM/60) * (1/gearRatio) * 2 * pi * radius); // from document
+    speed = ( (RPM/60) * (1/gearRatio) * 2 * PI * radius); // from document
     return speed;
   }
-  float updateTotalDistance(float speed, int currentIndex)
+  
+  //Calculating distance basic math, this is supposed to be consistently updated as time progresses so might need a loop
+  float updateTotalDistance(float speed, float time)
   {
-    float distance;
-    for(int time2 = 0; time2 < time1; i++)
-    {
-      distance = speed;
-    }
+    totalTravelledDistance += speed * time;
+    return totalTravelledDistance;
+  } 
 }
