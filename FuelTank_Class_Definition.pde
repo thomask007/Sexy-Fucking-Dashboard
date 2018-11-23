@@ -22,6 +22,12 @@ class FuelTank
     // This will probably need to be updated.
     return tank_capacity - fuel_level;
   }
+  
+  void setFuelTank(float fuel_level1)
+  {
+    fuel_level = fuel_level1;
+  }
+  
    
   
 }
