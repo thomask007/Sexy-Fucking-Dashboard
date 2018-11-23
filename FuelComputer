@@ -1,26 +1,42 @@
 class FuelComputer
 {
+  //Member Variables
   float fuelEconomy;
   float fuelConsumption;
-  float fuelEconomyHistory;
+  float fuelEconomyHistory; 
   float range;
-  float averagefuelEconomy;
-  float calculateFuelEconomy(float DistanceTravelled, float ConsumedFuel)
+  float averageFuelEconomy;
+  
+  //Calculating Fuel Economy 
+  float calculateFuelEconomy(float totalTravelledDistance, float fuelConsumption)
   {
-    fuelEconomy = (DistanceTravelled/ConsumedFuel);
+    fuelEconomy = (totalTravelledDistance/fuelConsumption);
     return fuelEconomy;
   }
-  calculateAverageFuelEconomy(float fuelEconomyHistroy)
+  
+  //Calculating Average Fuel Economy, the while loop condition should be changed, im not too sure about it   
+  calculateAverageFuelEconomy(float fuelEconomyHistory)
   {
-    averagefuelEconomy
+    int counter = 1;
+    while (currentIndex >= 0)
+    {
+      averageFuelEconomy = fuelEconomyHistory/counter;
+      counter++;
+      return averagefuelEconomy;
+    }
   }
-  float calculateFuelConsumption(float AverageFuelEconomy)
+  
+  //Calculating Fuel Consumption
+  float calculateFuelConsumption(float averageFuelEconomy)
   {
-    fuelConsumption = (1/AverageFuelEconomy)*100;
+    fuelConsumption = (1/averageFuelEconomy) * 100;
     return fuelConsumption;
   }
-  float calculateRange(float AverageFuelEconomy, float RemainingFuel)
+  
+  //Calculating Range 
+  float calculateRange(float averageFuelEconomy, float remainingFuel)
   {
-    range = averagefuelEconomy * RemainingFuel;
+    range = averageFuelEconomy * remainingFuel;
+    return range;
   }
 }
