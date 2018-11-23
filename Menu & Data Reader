@@ -1,0 +1,75 @@
+String filePath = "";
+
+void setup()
+{  
+  size(800,800);
+  background(0);
+  
+  //Creating the Menu
+  fill(255);
+  rect(width/4, height/4, width/2, height/4);
+  fill(0);
+  rect(width/4+3, height/4+3, width/2-6, height/4-6);
+  fill(255);
+  textSize(18);
+  text("Press 1 for BMW 323i", width/4 + width/16, height/4+height/16);
+  text("Press 2 for Truck F150", width/4 + width/16, height/4+2*height/16);
+  text("Press 3 to quit", width/4 + width/16, height/4+3*height/16);
+}
+
+void keyPressed()
+{
+  if (key == '1' && !keyHasBeenPressed)
+  {
+  filePath = "car_status_BMW_323i.csv";
+  keyHasBeenPressed = true;
+  }
+  else if (key == '2' && !keyHasBeenPressed)
+  {
+  filePath = "car_status_Truck_F150.csv";
+  keyHasBeenPressed = true;
+  }
+  else if (key =='3' && !keyHasBeenPressed)
+  {
+  keyHasBeenPressed = true;
+  quitFunction = true;
+  println("WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+  }
+}
+
+//filePath = "car_status_BMW_323i.csv";
+
+
+int currentIndex = 0;
+boolean keyHasBeenPressed = false;
+boolean quitFunction = false;
+
+
+void draw ()
+{
+
+  if (filePath != "")
+  {
+  background(0);
+  //Code for setting the variables dataTable and row to the correct values
+  Table dataTable = loadTable(filePath, "header");
+  TableRow row;
+  row = dataTable.getRow(currentIndex);
+  
+  //Code for displaying data from each row in console
+  println();
+  print(" Time: " + row.getFloat("Time") + " Gear Ratio: " +row.getFloat("Gear Ratio") + " Fuel Level: " + row.getFloat("Fuel Level (liter)"));
+  print(" RPM :", row.getInt("RPM"), "X : " + row.getFloat("X") + " Y : " + row.getFloat("Y"));
+  
+  //Code to increase index each time draw runs, and stop draw once index has reached 600 (last row of csv's)
+    currentIndex++;
+    if (currentIndex>=600)
+    noLoop();
+  }
+  
+  // Code to stop draw if 3 is pressed
+  if (quitFunction == true){
+  noLoop();
+  exit();
+  }
+}
