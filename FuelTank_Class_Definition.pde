@@ -8,12 +8,21 @@ class FuelTank
   float fuel_level;
   
   //Member Functions
-  float getConsumedFuel ()
+  float getConsumedFuel (String filePath)
   {
+    if (filePath == "car_status_BMW_323i.csv")
+    {
+      tank_capacity = 60;
+    }
+    else if (filePath == "car_status_Truck_F150.csv")
+    {
+      tank_capacity = 80;
+    }
     // I have no idea if this is what this function is supposed to do.
     // This will probably need to be updated.
     return tank_capacity - fuel_level;
   }
+   
   
 }
 
