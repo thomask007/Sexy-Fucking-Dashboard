@@ -1,0 +1,18 @@
+class Car
+{
+  TripComputer trip_comp;
+  //FuelTank fuel_tank;
+  //FuelComputer fuel_comp;
+  
+  Car ()
+  {
+    trip_comp= new TripComputer;
+    //fuel_tank= new FuelTank;
+    //fuel_comp = new FuelComputer;
+  }
+  
+  void processInput (SensorDataProvider sdp1)
+  {
+   trip_comp.readTripComputerVariables(sdp1.readRPM(), sdp1.readRatio(), sdp1.readTime());
+  }
+}
