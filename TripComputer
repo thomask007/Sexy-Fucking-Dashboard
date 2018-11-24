@@ -4,32 +4,29 @@ class TripComputer
   float RPM;
   float gearRatio;
   float totalTravelledDistance; 
-  float radius;
-  float speed;
+  float radius; // supposed to be given in the .csv, idk about this yet
   
-  void getCurrentSpeed(float RPM, float gearRatio, float radius) 
+  //Calculating speed based on formula given, not sure about radius being a part of the input 
+  float getCurrentSpeed(String filepath, float RPM, float gearRatio, float radius) 
   {
-    if (filePath == "car_status_BMW_323i.csv")
+    if (filepath == "car_status_BMW_323i.csv")
     {
       radius = 23;
     }
-    else if (filePath == "car_status_Truck_F150.csv")
+    else if (filepath == "car_status_Truck_F150.csv")
     {
       radius = 25.4;
-    } 
+    }
+    float speed; 
     speed = ( (RPM/60) * (1/gearRatio) * 2 * PI * radius); // from document
+    return speed;
   }
-
- //Speed is equal to the distance travelled in one second so adding the m/s values should give total distance
-  void updateTotalDistance()
+  
+  //Calculating distance basic math, this is supposed to be consistently updated as time progresses so might need a loop
+  float updateTotalDistance(float speed, float time)
   {
-    totalTravelledDistance += speed;
+    totalTravelledDistance += speed * time;
+    return totalTravelledDistance;
   } 
-  
-  void setTripComputerVariables(float RPM1, float gearRatio1)
-  {
-    RPM = RPM1;
-    gearRatio = gearRatio1;
-  }
-  
 }
+  
