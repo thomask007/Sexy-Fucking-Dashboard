@@ -7,7 +7,7 @@ class SensorDataProvider
   TableRow row;
   
   //Reading the input csv file, users choice of csv 
-  void Intialize(String filepath)
+  void Intialize(String filePath)
   {
     dataTable = loadTable(filePath, "header");
   }
@@ -26,19 +26,10 @@ class SensorDataProvider
       return;
     }
   }
-  
-  //Reading the Time at a certain index
-  float readTime()
-  {  
-    //row = dataTable.getRow(currentIndex);
-    float time = row.getFloat("Time");
-    return time;
-  }
    
   //Reading the RPM at a certain index 
   float readRPM()
   {
-    //row = dataTable.getRow(currentIndex);
     float RPM = row.getFloat("RPM");
     return RPM;
   }
@@ -46,7 +37,6 @@ class SensorDataProvider
   //Reading the Fuel Level at a certain index
   float readFuelLevel()
   {
-    //row = dataTable.getRow(currentIndex);
     float fuelLevel = row.getFloat("Fuel Level (liter)");
     return fuelLevel;
   }
@@ -54,7 +44,6 @@ class SensorDataProvider
   //Reading the Gear Ratio at a certain index
   float readRatio()
   {
-    //row = dataTable.getRow(currentIndex);
     float gearRatio = row.getFloat("Gear Ratio");
     return gearRatio;
   }
@@ -62,7 +51,6 @@ class SensorDataProvider
   //Reading the X coordinate at a certain index
   float readX()
   {
-   //row = dataTable.getRow(currentIndex);
    float xCoordinate = row.getFloat("X");
    return xCoordinate;
   }
@@ -70,7 +58,6 @@ class SensorDataProvider
   //Reading the Y coordinate at a certain index 
   float readY()
   {
-    //row = dataTable.getRow(currentIndex);
     float yCoordinate = row.getFloat("Y");
     return yCoordinate;
   }
