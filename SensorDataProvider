@@ -7,58 +7,89 @@ class SensorDataProvider
   TableRow row;
   
   //Reading the input csv file, users choice of csv 
-  void Intialize(String filePath)
+  void Initialize(String filePath)
   {
     dataTable = loadTable(filePath, "header");
+    row = dataTable.getRow(currentIndex);
   }
   
   //Moves onto the next line by incrementing the currentIndex
-  void readNext(int currentIndex)
+  void readNext()
   {
-    row = dataTable.getRow(currentIndex);
-    if (currentIndex <= dataTable.getRowCount())
+    //row = dataTable.getRow(currentIndex);
+    if (currentIndex < dataTable.getRowCount()-1)
     {
       currentIndex++;
       row = dataTable.getRow(currentIndex);
     }
     else
     {
-      return;
+      // IMPORTANT! For this to work there must be a global boolean called continueDraw, which is initially set to true
+      // At the end of the draw function, the following code MUST appear:
+        //if (!continueDraw)
+        //noLoop();
+      continueDraw = false;
     }
   }
    
   //Reading the RPM at a certain index 
   float readRPM()
   {
-    float RPM = row.getFloat("RPM");
-    return RPM;
+    return row.getFloat("RPM");
   }
   
   //Reading the Fuel Level at a certain index
   float readFuelLevel()
   {
-    float fuelLevel = row.getFloat("Fuel Level (liter)");
-    return fuelLevel;
+    return row.getFloat("Fuel Level (liter)");
   }
   
   //Reading the Gear Ratio at a certain index
   float readRatio()
   {
-    float gearRatio = row.getFloat("Gear Ratio");
-    return gearRatio;
+    return row.getFloat("Gear Ratio");
   }
   
   //Reading the X coordinate at a certain index
   float readX()
   {
-   float xCoordinate = row.getFloat("X");
-   return xCoordinate;
+   return row.getFloat("X");
   }
   
   //Reading the Y coordinate at a certain index 
   float readY()
   {
-    float yCoordinate = row.getFloat("Y");
-    return yCoordinate;
+    return row.getFloat("Y");
+  }
+ 
+  //added time just in case we need it. and for debug purposes
+  float readTime()
+  {
+    return row.getFloat("Time");
+  }
+  
+  // This is a new function I added that will print the data in the current row, for debug purposes.
+  void printData()
+  {
+    println("Current Index:", currentIndex, "Time:",readTime(),"X:",readX(),"Y:",readY(),"RPM:",readRPM(),"Fuel Level:",readFuelLevel(),"Gear Ratio:",readRatio());
   }
 }
+
+// SAMPLE PROGRAM THAT USES DRAW TO TEST SENSORDATAPROVIDER
+//String FilePath = "";
+//SensorDataProvider sdpx = new SensorDataProvider();
+//boolean continueDraw = true;
+//void setup ()
+//{
+// FilePath = "car_status_Truck_F150.csv"; 
+// sdpx.Initialize(FilePath);
+//}
+
+
+//void draw ()
+//{
+//  sdpx.printData();
+//  sdpx.readNext();
+//  if (continueDraw == false)
+//  noLoop();
+//}
