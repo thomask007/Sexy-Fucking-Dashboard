@@ -1,0 +1,81 @@
+String filePath = "";
+boolean continueDraw = true; 
+
+//New objects of Car and SDP
+Car vroom = new Car();
+SensorDataProvider sdpx = new SensorDataProvider();
+
+//error shows up if size is in setup so I put it in settings, idk what it does but it works however when 3 is pressed the window doesn't close it just stays at the startup screen
+void settings()
+{
+  size(800,800);
+}
+
+void setup()
+{  
+  background(0);
+  
+  //Creating the Menu
+  fill(255);
+  rect(width/4, height/4, width/2, height/4);
+  fill(0);
+  rect(width/4+3, height/4+3, width/2-6, height/4-6);
+  fill(255);
+  textSize(18);
+  text("Press 1 for BMW 323i", width/4 + width/16, height/4+height/16);
+  text("Press 2 for Truck F150", width/4 + width/16, height/4+2*height/16);
+  text("Press 3 to quit", width/4 + width/16, height/4+3*height/16);
+}
+
+void keyPressed()
+{
+  if (key == '1' && !keyHasBeenPressed)
+  {
+    filePath = "car_status_BMW_323i.csv";
+    keyHasBeenPressed = true;
+  }
+  else if (key == '2' && !keyHasBeenPressed)
+  {
+    filePath = "car_status_Truck_F150.csv";
+    keyHasBeenPressed = true;
+  }
+  else if (key =='3' && !keyHasBeenPressed)
+  {
+    keyHasBeenPressed = true;
+    quitFunction = true;
+    println("WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+  }
+}
+
+
+boolean keyHasBeenPressed = false;
+boolean quitFunction = false;
+
+
+void draw ()
+{
+  if (filePath != "")
+  {
+    background(0);
+      sdpx.Initialize(filePath);
+      vroom.processInput(sdpx);
+      float speed = vroom.trip_comp.getCurrentSpeed(sdpx.readRPM(), sdpx.readRatio());
+      float totalTravelledDistance = vroom.trip_comp.updateTotalDistance();
+      float consumedFuel = vroom.fuel_tank.getConsumedFuel();
+      float fuelEconomy = vroom.fuel_comp.calculateFuelEconomy(totalTravelledDistance, consumedFuel);
+      println("Speed: " + speed + " M/S", "  Distance Travelled: " + totalTravelledDistance + " KM", "  Fuel Consumed: " + consumedFuel + " litres", "  Fuel Economy: " + fuelEconomy + " KM/LITRE");
+      sdpx.readNext();
+    
+    if (continueDraw == false)
+    {
+      noLoop();
+    }
+    
+    // Code to stop draw if 3 is pressed
+    if (quitFunction == true)
+    {
+      noLoop();
+      exit();
+    }
+  }
+}
