@@ -15,6 +15,5 @@ class Car
   {
    trip_comp.setTripComputerVariables(sdp1.readRPM(), sdp1.readRatio());
    fuel_tank.setFuelTank(sdp1.readFuelLevel());
-   fuel_comp.setFuelComputer(trip_comp.totalTravelledDistance);
   }
 }
