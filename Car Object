@@ -13,7 +13,67 @@ class Car
   
   void processInput (SensorDataProvider sdp1)
   {
-   trip_comp.setTripComputerVariables(sdp1.readRPM(), sdp1.readRatio());
-   fuel_tank.setFuelTank(sdp1.readFuelLevel());
+   trip_comp.getCurrentSpeed(sdp1.readRPM(),sdpx.readRatio());
+   trip_comp.updateTotalDistance();
+   fuel_tank.getConsumedFuel(sdp1.readFuelLevel());
+   fuel_comp.calculateFuelEconomy(trip_comp.totalTravelledDistance, fuel_tank.consumedFuel);
+   fuel_comp.calculateAverageFuelEconomy(sdp1.currentIndex);
+  }
+}
+
+// GLOBAL VARIABLES
+String filePath = "";
+boolean continueDraw = true;
+boolean keyHasBeenPressed = false;
+boolean quitFunction = false;
+// GLOBAL VARIABLES END
+
+//New objects of Car and SDP
+Car vroom = new Car();
+SensorDataProvider sdpx = new SensorDataProvider();
+
+
+void setup()
+{
+  size(800,800);
+  background(0);
+  Menu menu1 = new Menu();
+  menu1.createMenu(width/4, height/4);
+}
+
+void draw ()
+{
+  if (filePath != "")
+  {
+    background(0);
+      sdpx.Initialize(filePath);
+      vroom.processInput(sdpx);
+      
+      
+      ///// THIS STUFF IS USED PURELY FOR TESTING PURPOSES AND IS NOT NECESSARY TO ANYTHING IN THE ACTUAL PROGRAM.
+      //float speed = vroom.trip_comp.getCurrentSpeed(sdpx.readRPM(), sdpx.readRatio());
+      float speed = vroom.trip_comp.speed;
+      //float totalTravelledDistance = vroom.trip_comp.updateTotalDistance();
+      float totalTravelledDistance = vroom.trip_comp.totalTravelledDistance;
+      //float consumedFuel = vroom.fuel_tank.getConsumedFuel();
+      float consumedFuel = vroom.fuel_tank.consumedFuel;
+      float fuelEconomy = vroom.fuel_comp.fuelEconomy;
+      float averagefuelEconomy = vroom.fuel_comp.averageFuelEconomy;
+      println("Time:", sdpx.readTime(),"Speed: " + speed , "km/hour", "  Distance Travelled: " + totalTravelledDistance + " KM", "  Fuel Consumed: " + consumedFuel + " litres", "  Fuel Economy: " + fuelEconomy + " KM/LITRE", "Avg Fuel Economy", averagefuelEconomy );
+      /////TEST SECTION ENDS. AFTER THIS IS IMPORTANT.
+      
+      sdpx.readNext();
+    
+    if (continueDraw == false)
+    {
+      noLoop();
+    }
+    
+    // Code to stop draw if 3 is pressed
+    if (quitFunction == true)
+    {
+      noLoop();
+      exit();
+    }
   }
 }
