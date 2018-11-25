@@ -6,9 +6,10 @@ class FuelTank
   // Member Variables
   float tank_capacity;
   float fuel_level;
+  float consumedFuel;
   
   //Member Functions
-  float getConsumedFuel (String filePath)
+  float getConsumedFuel ()
   {
     if (filePath == "car_status_BMW_323i.csv")
     {
@@ -20,7 +21,7 @@ class FuelTank
     }
     // I have no idea if this is what this function is supposed to do.
     // This will probably need to be updated.
-    return tank_capacity - fuel_level;
+    return consumedFuel = tank_capacity - fuel_level;
   }
   
   void setFuelTank(float fuel_level1)
