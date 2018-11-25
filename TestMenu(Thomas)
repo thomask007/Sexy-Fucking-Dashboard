@@ -63,7 +63,15 @@ void draw ()
       float totalTravelledDistance = vroom.trip_comp.updateTotalDistance();
       float consumedFuel = vroom.fuel_tank.getConsumedFuel();
       float fuelEconomy = vroom.fuel_comp.calculateFuelEconomy(totalTravelledDistance, consumedFuel);
-      println("Speed: " + speed + " M/S", "  Distance Travelled: " + totalTravelledDistance + " KM", "  Fuel Consumed: " + consumedFuel + " litres", "  Fuel Economy: " + fuelEconomy + " KM/LITRE");
+      float averageFuelEconomy = vroom.fuel_comp.calculateAverageFuelEconomy(vroom.fuel_comp.fuelEconomyHistory, sdpx.currentIndex);
+      float range = vroom.fuel_comp.calculateRange(averageFuelEconomy, sdpx.readFuelLevel());
+      Gauge speed1 = new Gauge(10000.0, 0.0, speed, "SPEED (M/S)", 150, 130, 200.0);
+      Gauge rpm1 = new Gauge(2400, 600, sdpx.readRPM(), "RPM", 150, 400, 200);
+      Gauge fuelLevel1 = new Gauge(50, 47, sdpx.readFuelLevel(), "FUEL(LITRE)", 150, 670, 200);
+      speed1.Draw_Gauge();
+      rpm1.Draw_Gauge();
+      fuelLevel1.Draw_Gauge();
+      println("Speed: " + speed + " M/S", "  Distance Travelled: " + totalTravelledDistance + " KM", "  Fuel Consumed: " + consumedFuel + " litres", "  Fuel Economy: " + fuelEconomy + " KM/LITRE", "  Average Fuel Economy : " + averageFuelEconomy + " KM/LITRE", "  Range: " + range + " KM");
       sdpx.readNext();
     
     if (continueDraw == false)
