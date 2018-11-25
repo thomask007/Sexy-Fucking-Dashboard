@@ -18,13 +18,7 @@ class FuelComputer
   //Calculating Average Fuel Economy, the while loop condition should be changed, im not too sure about it   
   float calculateAverageFuelEconomy(float fuelEconomyHistory, int currentIndex)
   {
-    int counter = 1;
-    while (currentIndex >= 0)
-    {
-      averageFuelEconomy = fuelEconomyHistory/(float)counter;
-      counter++;
-      currentIndex--;
-    }
+    averageFuelEconomy = fuelEconomyHistory/(float)currentIndex;
     return averageFuelEconomy;
   }
   
