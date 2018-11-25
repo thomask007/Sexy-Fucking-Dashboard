@@ -1,4 +1,3 @@
-
 class Gauge {
   
   // Member variables related to displaying the parameter
@@ -30,9 +29,12 @@ class Gauge {
     //Write text under circle
     fill(255);
     textSize(14);
-    text(units, gauge_posx-diameter/8, gauge_posy+diameter/2+(diameter/10)); 
-    textSize(56);
-    text((int)current_value, gauge_posx- diameter/5, gauge_posy +diameter/6);
+    //text(units, gauge_posx-diameter/8, gauge_posy+diameter/2+(diameter/10)); 
+    text(units, gauge_posx, gauge_posy+diameter/2 + 10); 
+    textAlign(CENTER, CENTER);
+    textSize(50);
+    text((nf(current_value, 2, 1)), gauge_posx, gauge_posy);
+    textAlign(CENTER, CENTER);
   }
   
   //Constructor Function (makes assigning values to member variables simpler in the setup/draw
