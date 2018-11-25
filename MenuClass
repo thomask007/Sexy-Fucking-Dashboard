@@ -1,0 +1,19 @@
+class Menu
+{
+  
+  // Making the menu a class saves space in setup/void, allows us to build on it in the future, and allows us to change
+  // the x and y positions of where it is displayed.
+  
+  void createMenu(float xpos, float ypos)
+  {
+  fill(255);
+  rect(xpos, ypos, width/2, height/4);
+  fill(0);
+  rect(xpos+3, ypos+3, width/2-6, height/4-6);
+  fill(255);
+  textSize(18);
+  text("Press 1 for BMW 323i", xpos + width/16, ypos+height/16);
+  text("Press 2 for Truck F150", xpos + width/16, ypos+2*height/16);
+  text("Press 3 to quit", xpos + width/16, ypos+3*height/16);
+  }
+}
