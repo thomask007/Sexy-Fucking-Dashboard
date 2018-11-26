@@ -1,0 +1,20 @@
+// Key is pressed
+void keyPressed()
+{
+  if (key == '1' && !keyHasBeenPressed)
+  {
+    filePath = "car_status_BMW_323i.csv";
+    keyHasBeenPressed = true;
+  }
+  else if (key == '2' && !keyHasBeenPressed)
+  {
+    filePath = "car_status_Truck_F150.csv";
+    keyHasBeenPressed = true;
+  }
+  else if (key =='3' && !keyHasBeenPressed)
+  {
+    keyHasBeenPressed = true;
+    quitFunction = true;
+    println("WAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+  }
+}
