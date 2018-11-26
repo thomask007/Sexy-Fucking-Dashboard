@@ -4,10 +4,11 @@ class TripComputer
   float RPM;
   float gearRatio;
   float totalTravelledDistance; 
+  float distanceTravelledInterval;
   float radius;
   float speed;
   
-  float getCurrentSpeed(float RPM, float gearRatio) 
+  void getCurrentSpeed(float RPM, float gearRatio) 
   {
     if (filePath == "car_status_BMW_323i.csv")
     {
@@ -17,20 +18,15 @@ class TripComputer
     {
       radius = 0.254;
     } 
-    return speed = ( (RPM/60) * (1/gearRatio) * 2 * PI * radius); // from document
+    speed = ( (RPM/60) * (1/gearRatio) * 2 * PI * radius); // from document
+    speed *= 3.6; //Converts to km per hour
   }
 
- //Speed is equal to the distance travelled in one second so adding the m/s values should give total distance, divided by 1000 to get km travelled/sec
-  float updateTotalDistance()
+ //Speed is equal to the distance travelled in one second so adding the m/s values should give total distance
+  void updateTotalDistance()
   {
-    return totalTravelledDistance += speed/1000;
+    distanceTravelledInterval = speed/3600;
+    totalTravelledDistance += distanceTravelledInterval;
   } 
-  
-  //constructor function if necessary (not really necessary)
-  void setTripComputerVariables(float RPM1, float gearRatio1)
-  {
-    RPM = RPM1;
-    gearRatio = gearRatio1;
-  }
   
 }
