@@ -16,7 +16,7 @@ class Car
    trip_comp.getCurrentSpeed(sdp1.readRPM(),sdpx.readRatio());
    trip_comp.updateTotalDistance();
    fuel_tank.getConsumedFuel(sdp1.readFuelLevel());
-   fuel_comp.calculateFuelEconomy(trip_comp.totalTravelledDistance, fuel_tank.consumedFuel);
+   fuel_comp.calculateFuelEconomy(trip_comp.distanceTravelledInterval, fuel_tank.consumedFuel);
    fuel_comp.calculateAverageFuelEconomy(sdp1.currentIndex);
   }
 }
@@ -49,8 +49,7 @@ void draw ()
       sdpx.Initialize(filePath);
       vroom.processInput(sdpx);
       
-      
-      ///// THIS STUFF IS USED PURELY FOR TESTING PURPOSES AND IS NOT NECESSARY TO ANYTHING IN THE ACTUAL PROGRAM.
+      ///// FOR TESTING PURPOSES ONLY
       //float speed = vroom.trip_comp.getCurrentSpeed(sdpx.readRPM(), sdpx.readRatio());
       float speed = vroom.trip_comp.speed;
       //float totalTravelledDistance = vroom.trip_comp.updateTotalDistance();
@@ -60,7 +59,7 @@ void draw ()
       float fuelEconomy = vroom.fuel_comp.fuelEconomy;
       float averagefuelEconomy = vroom.fuel_comp.averageFuelEconomy;
       println("Time:", sdpx.readTime(),"Speed: " + speed , "km/hour", "  Distance Travelled: " + totalTravelledDistance + " KM", "  Fuel Consumed: " + consumedFuel + " litres", "  Fuel Economy: " + fuelEconomy + " KM/LITRE", "Avg Fuel Economy", averagefuelEconomy );
-      /////TEST SECTION ENDS. AFTER THIS IS IMPORTANT.
+      //// NON ESSENTIAL TESTING CODE ENDS
       
       sdpx.readNext();
     
