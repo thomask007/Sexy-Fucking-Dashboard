@@ -1,43 +1,50 @@
 
-//Class Definition for Fuel Tank (Joel)
-
 class FuelTank
 {
   // Member Variables
   float tank_capacity;
-  float fuel_level;
   float consumedFuel;
+  float totalconsumedFuel;
+  float initialFuel;
+  boolean initialHasBeenSet;
+  float totalconsumedFuel2;
   
   //Member Functions
-  float getConsumedFuel ()
+  
+  // getConsumedFuel has been changed to show the fuel consumed between last second and the current second
+  void getConsumedFuel (float fuel_level)
   {
-    if (filePath == "car_status_BMW_323i.csv")
+    if (!initialHasBeenSet)
     {
-      tank_capacity = 60;
+      totalconsumedFuel2 =tank_capacity - fuel_level;
+      initialHasBeenSet=true;
     }
-    else if (filePath == "car_status_Truck_F150.csv")
+    else
     {
-      tank_capacity = 80;
-    }
-    // I have no idea if this is what this function is supposed to do.
-    // This will probably need to be updated.
-    return consumedFuel = tank_capacity - fuel_level;
-  }
-  
-  void setFuelTank(float fuel_level1)
-  {
-    fuel_level = fuel_level1;
-  }
-  
-   
-  
-}
+      //consumedFuel = totalconsumedFuel - fuel_level;
+      if (filePath == "car_status_BMW_323i.csv")
+      {
+        tank_capacity = 60;
+      }
+      else if (filePath == "car_status_Truck_F150.csv")
+      {
+        tank_capacity = 80;
+      }
 
-//TEST STUFF (This can be deleted, it's just proof it works)
-void setup()
-{
-  FuelTank Jimmothy = new FuelTank();
-  Jimmothy.tank_capacity=420;
-  Jimmothy.fuel_level=69;
-  println(Jimmothy.getConsumedFuel());
+      totalconsumedFuel = tank_capacity - fuel_level;
+      consumedFuel = totalconsumedFuel - totalconsumedFuel2;
+      totalconsumedFuel2 = totalconsumedFuel;
+    }
+    
+  }
+  
+  FuelTank()
+  {
+    tank_capacity=0;
+    consumedFuel=0;
+    totalconsumedFuel=0;
+    initialFuel=0;
+    initialHasBeenSet=false;
+  }
+  
 }
