@@ -1,4 +1,3 @@
-
 class FuelTank
 {
   // Member Variables
@@ -7,21 +6,13 @@ class FuelTank
   float totalconsumedFuel;
   float initialFuel;
   boolean initialHasBeenSet;
-  float totalconsumedFuel2;
+  float previousConsumedFuel;
   
   //Member Functions
   
   // getConsumedFuel has been changed to show the fuel consumed between last second and the current second
   void getConsumedFuel (float fuel_level)
   {
-    if (!initialHasBeenSet)
-    {
-      totalconsumedFuel2 =tank_capacity - fuel_level;
-      initialHasBeenSet=true;
-    }
-    else
-    {
-      //consumedFuel = totalconsumedFuel - fuel_level;
       if (filePath == "car_status_BMW_323i.csv")
       {
         tank_capacity = 60;
@@ -30,11 +21,16 @@ class FuelTank
       {
         tank_capacity = 80;
       }
-
+      // I have no idea if this is what this function is supposed to do.
+      // This will probably need to be updated.
       totalconsumedFuel = tank_capacity - fuel_level;
-      consumedFuel = totalconsumedFuel - totalconsumedFuel2;
-      totalconsumedFuel2 = totalconsumedFuel;
-    }
+      consumedFuel = totalconsumedFuel - previousConsumedFuel;
+      previousConsumedFuel = totalconsumedFuel;
+      if (!initialHasBeenSet)
+      {
+        consumedFuel =0;
+        initialHasBeenSet = true;
+      }
     
   }
   
