@@ -3,21 +3,56 @@ class FuelComputer
   //Member Variables
   float fuelEconomy;
   float fuelConsumption;
-  float fuelEconomyHistory; 
+  //float fuelEconomyHistory; 
   float range;
   float averageFuelEconomy;
+  float [] fuelEconomyHistoryArr;
 
+  FuelComputer()
+  {
+    fuelEconomyHistoryArr= new float [600];
+  }
+  
   //Calculating Fuel Economy 
   void calculateFuelEconomy(float totalTravelledDistance, float fuelConsumption)
   {
+    if (fuelConsumption < 100000 && fuelConsumption!=0)
+    {
     fuelEconomy = (totalTravelledDistance/fuelConsumption);
-    fuelEconomyHistory += fuelEconomy;
+    //fuelEconomyHistory += fuelEconomy;
+    fuelEconomyHistoryArr[sdpx.currentIndex] = fuelEconomy;
+    }
+    else 
+    {
+      //do nothing
+    }
   }
   
+  float sumFuelEconomy (int currentIndex2)
+  {
+    int min = currentIndex2 -60;
+    if (min <0)
+    min =0;
+    int max = currentIndex2;
+    float sum =0;
+    for (int i=min; i<=max; i++)
+    {
+      sum += fuelEconomyHistoryArr[i];
+    }
+    return sum;
+  }
   //Calculating Average Fuel Economy, the while loop condition should be changed, im not too sure about it   
   void calculateAverageFuelEconomy(int currentIndex)
   {
-  averageFuelEconomy = fuelEconomyHistory/currentIndex;
+    int divisor;
+    if (currentIndex > 59)
+    divisor =60;
+    else
+    divisor =currentIndex+1;
+    averageFuelEconomy = sumFuelEconomy(currentIndex)/(divisor);
+    //if (currentIndex == 0)
+    //averageFuelEconomy = sumFuelEconomy();
+//  averageFuelEconomy = fuelEconomyHistory/currentIndex;
   }
   
   //Calculating Range 
@@ -26,3 +61,4 @@ class FuelComputer
     range = averageFuelEconomy * remainingFuel;
   }
  
+}
