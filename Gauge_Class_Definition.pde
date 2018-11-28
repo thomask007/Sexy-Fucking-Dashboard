@@ -26,13 +26,23 @@ class Gauge {
     ellipse (gauge_posx, gauge_posy, diameter, diameter);
     fill(0);
     ellipse(gauge_posx, gauge_posy, diameter-10, diameter-10);
+    //Changes the font to look more digital
+    PFont digital = createFont("digital-7.ttf", 12);
+    textFont(digital);
     //Write text under circle
     fill(255);
     textSize(14);
     //text(units, gauge_posx-diameter/8, gauge_posy+diameter/2+(diameter/10)); 
     text(units, gauge_posx, gauge_posy+diameter/2 + 10); 
     textAlign(CENTER, CENTER);
-    textSize(50);
+    if(diameter < width/7)
+    {
+      textSize(20);
+    }
+    else
+    {
+      textSize(50);
+    }
     text((nf(current_value, 2, 1)), gauge_posx, gauge_posy);
     textAlign(CENTER, CENTER);
   }
@@ -62,7 +72,6 @@ class Gauge {
   }
   
 }
-
 
 // This is all just for testing purposes
 void setup()
