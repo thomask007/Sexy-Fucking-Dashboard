@@ -31,7 +31,7 @@ void draw ()
   {
       //Initializing
       background(0);
-      frameRate(5);
+      frameRate(10);
       sdpx.Initialize(filePath);
       vroom.processInput(sdpx);
       
@@ -39,7 +39,7 @@ void draw ()
       //Speed
       float speed = vroom.trip_comp.speed;
       Gauge speed1 = new Gauge(10000.0, 0.0, speed, "SPEED (KM/H)", width/2 - width/4, 3*height/10, width/5);
-      speed1.Draw_Gauge();
+      speed1.Draw_Gauge_Speed();
       
       
       //Distance Travelled
@@ -52,7 +52,7 @@ void draw ()
       //Fuel Levels
       float consumedFuel = vroom.fuel_tank.consumedFuel;
       Gauge fuelLevel1 = new Gauge(50, 47, sdpx.readFuelLevel(), "FUEL(LITRE)", width/2 + width/4, 3*height/10, width/5);
-      fuelLevel1.Draw_Gauge();
+      fuelLevel1.Draw_Gauge_FUEL();
       fill(0, 200, 0);
       textSize(20);
       text("FUEL CONSUMPTION: " + nf(consumedFuel, 1, 2) + " LITRE/(100 KM)", 2*width/3, 3*height/5 + 20);
@@ -75,17 +75,17 @@ void draw ()
       
       //RPM
       Gauge rpm1 = new Gauge(2400, 600, sdpx.readRPM(), "RPM", width/2, 3*height/10, width/5);
-      rpm1.Draw_Gauge();
+      rpm1.Draw_Gauge_RPM();
       
       
       //Temp direction Gauge, probably requires a new function to find direction and a new gauge function to display properly
-      Gauge time = new Gauge(1000, 0, sdpx.readTime(), "Time (s)", width/7, height/12, width/20);
+      Gauge time = new Gauge(1000, 0, sdpx.readTime(), "Time (s)", width/20, height/12, width/20);
       time.Draw_Gauge();
       
       
       //Barchart for Average Fuel Economy
       barChart = new BarChart(this);
-      barChart.setData(vroom.fuel_comp.fuelEconomyHistoryArr);
+      barChart.setData(vroom.fuel_comp.fuelEconomyHistoryChart);
       // Scaling
       barChart.setMinValue(0);
       barChart.setMaxValue(30);
@@ -96,31 +96,36 @@ void draw ()
       barChart.showCategoryAxis(true); 
       // Bar colours and appearance
       barChart.setBarColour(color(250, 100, 20, 200));
-      barChart.setBarGap(0.5);
-      barChart.draw(50, 550, 500, 180);
+      barChart.setBarGap(5);
+      barChart.draw(100, 550, 500, 180);
       // title
       fill(150, 50, 20);
       textSize(20);
-      text("Average Fuel Economy (km/liter) over time (sec)", 280, 750);
+      text("Average Fuel Economy (km/liter) over time (sec)", 350, 750);
       
+      //Barchart for Fuel Consumption
       barChart = new BarChart(this);
-      barChart.setData(vroom.fuel_comp.fuelEconomyHistoryArr);
+      barChart.setData(vroom.fuel_tank.fuelConsumptionChart);
+      
       // Scaling
       barChart.setMinValue(0);
-      barChart.setMaxValue(30);
+      barChart.setMaxValue(0.01);
+      
       // Axis appearance
       textFont(createFont("Serif", 5), 10);
       barChart.showValueAxis(true); 
       barChart.setValueFormat("#"); 
       barChart.showCategoryAxis(true); 
+      
       // Bar colours and appearance
       barChart.setBarColour(color(250, 100, 20, 200));
-      barChart.setBarGap(0.5);
+      barChart.setBarGap(5);
       barChart.draw(750, 550, 500, 180);
+      
       // title
       fill(150, 50, 20);
       textSize(20);
-      text("Fuel Consumption (liter) over time (sec)", 980, 750);
+      text("Fuel Consumption (liter) over time (sec)", 990, 750);
       
       //FOR DEBUGGING
       //println("Time:", sdpx.readTime(),"Speed: " + speed , "km/hour", "  Distance Travelled: " + totalTravelledDistance + " KM", "  Fuel Consumed: " + consumedFuel + " litres", "  Fuel Economy: " + fuelEconomy + " KM/LITRE", "  Avg Fuel Economy: ", averageFuelEconomy, "  Range: " + range + " KM" );
