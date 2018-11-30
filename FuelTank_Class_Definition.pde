@@ -7,6 +7,8 @@ class FuelTank
   float initialFuel;
   boolean initialHasBeenSet;
   float previousConsumedFuel;
+  float [] fuelConsumptionArr;
+  float [] fuelConsumptionChart;
   
   //Member Functions
   
@@ -25,7 +27,23 @@ class FuelTank
       // This will probably need to be updated.
       totalconsumedFuel = tank_capacity - fuel_level;
       consumedFuel = totalconsumedFuel - previousConsumedFuel;
+      fuelConsumptionArr[sdpx.currentIndex] = consumedFuel;
       previousConsumedFuel = totalconsumedFuel;
+        if (sdpx.currentIndex < 40)
+        {
+          for(int i = 0; i < 40; i++)
+          {
+            fuelConsumptionChart[i] = fuelConsumptionArr[i];
+          }
+        }
+        else 
+        {
+          fuelConsumptionChart[39] = fuelConsumptionArr[sdpx.currentIndex];
+          for(int j = 0; j < 39; j++)
+          {
+            fuelConsumptionChart[j] = fuelConsumptionChart[j+1];
+          }   
+         } 
       if (!initialHasBeenSet)
       {
         consumedFuel =0;
@@ -41,6 +59,8 @@ class FuelTank
     totalconsumedFuel=0;
     initialFuel=0;
     initialHasBeenSet=false;
+    fuelConsumptionArr= new float [600];
+    fuelConsumptionChart = new float [40];
   }
   
 }
